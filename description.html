@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Beschreibung</title>
+    <meta charset="UTF-8">
+    <link href='css/bootstrap.min.css' rel='stylesheet'/>
+
+    <script src='js/jquery-2.1.0.min.js'></script>
+    <script src='js/jquery.nicescroll.min.js'></script>
+    <script src='js/angular.min.js'></script>
+    <script src='js/helper.js'></script>
+    <script src='js/app.js'></script>
+    <script src='js/services.js'></script>
+</head>
+<body data-ng-app="jobsApp" data-ng-controller="JobsDescriptionCtrl">
+<div id="description-container" class="col-md-8 col-md-offset-2">
+    <br/>
+    <a class="btn btn-default nav-button font" href="/web/application-form.jsf?customer={{customer}}&job={{jobId}}">Bewerben</a>
+    <br/>
+    <div data-ng-bind-html="jobDescriptionPage"></div>
+    <a class="btn btn-default nav-button font" href="/web/application-form.jsf?customer={{customer}}&job={{jobId}}">Bewerben</a>
+</div>
+</body>
+</html>
