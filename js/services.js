@@ -26,13 +26,6 @@ jobsService.factory('jobsAPIService', function ($http) {
         });
     };
 
-    jobsAPI.getStyles = function () {
-        return $http({
-            method: 'JSONP',
-            url: baseUrl + '/job/styles/' + customer + '?callback=JSON_CALLBACK'
-        });
-    };
-
     jobsAPI.submitForm = function (formData) {
         return $http({
             data: formData,
