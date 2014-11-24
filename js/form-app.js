@@ -26,7 +26,7 @@ jobsFormController.controller('JobsFormCtrl', function ($scope, jobsAPIService) 
     $scope.submitForm = function () {
         jobsAPIService.submitForm(getFormData("#applicationForm"))
             .success(function () {
-                window.location = "/web/message.html";
+                window.location = "message.html";
             });
     };
 });
