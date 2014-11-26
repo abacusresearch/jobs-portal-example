@@ -7,17 +7,17 @@ var jobsController = angular.module('jobsControllers', []);
 
 jobsController.controller('JobsListCtrl', function ($scope, jobsAPIService) {
     $scope.jobList = [];
-    init(jobsAPIService, $scope);
+    init($scope);
     jobsAPIService.getJobs()
         .success(
         function (response) {
-            $scope.jobList = response;
+             $scope.jobList = response;
         })
 });
 
 jobsController.controller('JobsDescriptionCtrl', function ($sce, $scope, jobsAPIService) {
     $scope.jobDescriptionPage = [];
-    init(jobsAPIService, $scope);
+    init($scope);
     jobsAPIService.getDescription()
         .success(function (response) {
             $scope.jobDescriptionPage = $sce.trustAsHtml(response.descriptionPage);

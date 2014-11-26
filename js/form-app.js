@@ -17,7 +17,7 @@ var jobsFormController = angular.module('jobsFormControllers', []);
 
 jobsFormController.controller('JobsFormCtrl', function ($scope, jobsAPIService) {
     $scope.jobFields = [];
-    init(jobsAPIService, $scope);
+    init($scope);
     jobsAPIService.getForm()
         .success(function (response) {
             var form = JSON.parse(response.form);

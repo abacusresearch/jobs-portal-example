@@ -22,11 +22,11 @@ function getRequestParam(name) {
     return results == null ? null : results[1] || 0;
 }
 
-function getRequestParams(scope) {
+function getRequestParams($scope) {
     customer = getRequestParam("customer");
-    scope.customer = customer;
+    $scope.customer = customer;
     jobId = getRequestParam("job");
-    scope.jobId = jobId;
+    $scope.jobId = jobId;
 }
 
 var guid = (function () {
