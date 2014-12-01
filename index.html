@@ -17,7 +17,8 @@
 <br/>
 
 <div class="col-md-4 col-md-offset-4">
-    <input class="form-control font" type="text" data-ng-model="searchText">
+    <h3>Stellenbezeichnung</h3>
+    <input class="form-control font" type="text" data-ng-model="searchText" placeholder="Suchbegriff">
     <br/>
 
     <div id="nav-list" data-ng-repeat="job in jobList | filter:searchText">
