@@ -37,20 +37,28 @@
             <div data-ng-switch="field.Type">
                 <div class="form-group">
                     <label class="col-sm-2 control-label" data-ng-class="{required: field.Mandatory}">{{field.DisplayName}}</label>
+
                     <div data-ng-switch-when="String">
                         <div class="col-sm-10" data-ng-if="field.IsRadio">
                             <select class="form-control" data-dtype="{{field.Type}}" name="{{field.ID}}">
-                                <option data-ng-repeat="value in field.RadioValues">{{value.DisplayName}}</option>
+                                <option data-ng-repeat="value in field.RadioValues"
+                                        value="{{value.Value}}">
+                                    {{value.DisplayName}}
+                                </option>
                             </select>
                         </div>
                         <div class="col-sm-10" data-ng-if="!field.IsRadio">
-                            <input type="text" class="form-control" data-dtype="{{field.Type}}" name="{{field.ID}}">
+                            <input type="text"
+                                   class="form-control"
+                                   data-dtype="{{field.Type}}"
+                                   name="{{field.ID}}"
+                                   data-ng-readonly="{{field.ReadOnly}}"
+                                   data-ng-required="{{field.Mandatory}}"
+                                   data-ng-maxlength="{{field.Length}}">
                         </div>
                     </div>
-                    <div>
-                        <div class="col-sm-10" data-ng-switch-when="Date">
-                            <input type="text" class="form-control" data-dtype="{{field.Type}}" name="{{field.ID}}">
-                        </div>
+                    <div class="col-sm-10" data-ng-switch-when="Date">
+                        <input type="text" class="form-control" data-dtype="{{field.Type}}" name="{{field.ID}}">
                     </div>
                 </div>
             </div>

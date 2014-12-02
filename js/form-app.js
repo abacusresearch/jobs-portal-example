@@ -17,11 +17,13 @@ var jobsFormController = angular.module('jobsFormControllers', []);
 
 jobsFormController.controller('JobsFormCtrl', function ($scope, jobsAPIService) {
     $scope.jobFields = [];
+    $scope.jobValues = [];
     init($scope);
     jobsAPIService.getForm()
         .success(function (response) {
             var form = JSON.parse(response.form);
             $scope.jobFields = form.DataRecord.Fields;
+            $scope.jobValues = form.DataRecord.Values;
         });
     $scope.submitForm = function () {
         jobsAPIService.submitForm(getFormData("#applicationForm"))
