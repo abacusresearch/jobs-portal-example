@@ -57,7 +57,7 @@ JSONP_Callback(
   [
     {
       "description":"Job",
-      "form":"{}",
+      "form":{},
       "jobId":"7d6e5e8d-30a8-41d6-a9dd-7b4f652e494a"
     }
   ]
