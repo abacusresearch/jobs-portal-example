@@ -3,10 +3,10 @@ Jobs Portal Beispiel
 
 Beispielprojekt für eine Anbindung an das Abacus Jobs Portal
 
-API Stellen
+JSON API Stellen
 URL für Version 1: https://jobs.abasky.net/rest/v1
 
-1. Liste aller Stellen
+### Liste aller Stellen
 
 /job/list/{customer_guid}?callback={JSONP_Callback}
 
@@ -24,3 +24,24 @@ JSONP_Callback(
   ]
 )
 ```
+
+### Stellenbeschreibung
+
+/job/description/{jobId}?callback={JSONP_Callback}
+
+- jobId: Identifikation der Stelle, die in der Liste aller Stellen mitgegeben wird.
+- JSONP_Callback: Callback Funktion für CORS requests.
+ 
+```
+angular.callbacks._0({"description":"Job","descriptionPage":"
+JSONP_Callback(
+  [
+    {
+      "description":"Job",
+      "descriptionPage":"<div></div>",
+      "jobId":"7d6e5e8d-30a8-41d6-a9dd-7b4f652e494a"
+    }
+  ]
+)
+```
+Der Parameter descriptionPage umfasst den kompletten Stellenbschrieb in HTML.
