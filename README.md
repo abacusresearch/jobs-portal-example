@@ -67,3 +67,58 @@ Der Parameter form umfasst die Formulardefinition in JSON.
 
 Bespiel eines Formulars:
 
+```
+{
+  "Text": "Sachbearbeiter/in Human Resources",
+  "DataRecord": {
+    "Values": [
+      {
+        "Value": "D",
+        "Type": "String",
+        "ID": "Language"
+      }
+    ],
+    "Fields": [
+      {
+        "Visible": true,
+        "Type": "String",
+        "Mandatory": true,
+        "Length": 25,
+        "DisplayLanguage": "de",
+        "ID": "FirstName",
+        "DisplayName": "Vorname"
+      },
+      {
+        "Visible": true,
+        "Type": "Date",
+        "DisplayLanguage": "de",
+        "ID": "DateOfBirth",
+        "DisplayName": "Geburtsdatum"
+      },
+      {
+        "IsRadio": true,
+        "Visible": true,
+        "Type": "String",
+        "ID": "Language",
+        "DisplayLanguage": "de",
+        "RadioValues": [
+          {
+            "Value": "D",
+            "DisplayLanguage": "de",
+            "ID": "D",
+            "DisplayName": "Deutsch"
+          },
+          {
+            "Value": "E",
+            "DisplayLanguage": "de",
+            "ID": "E",
+            "DisplayName": "Englisch"
+          }
+        ],
+        "DisplayName": "Sprache"
+      }
+    ]
+  },
+  "Title": "Sachbearbeiter/in Human Resources"
+}
+```
