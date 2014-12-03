@@ -49,7 +49,7 @@ JSONP_Callback(
   ]
 )
 ```
-Der Parameter descriptionPage umfasst den kompletten Stellenbschrieb in HTML.
+- descriptionPage: Kompletter Stellenbschrieb in HTML.
 
 ### Bewerbungsformular
 
@@ -71,9 +71,9 @@ JSONP_Callback(
   ]
 )
 ```
-Der Parameter form umfasst die Formulardefinition in JSON.
+- form: Formulardefinition in JSON.
 
-Bespiel eines Formulars:
+Bespiel einer solchen Definition:
 
 ```
 {
