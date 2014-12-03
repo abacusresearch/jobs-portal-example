@@ -224,7 +224,7 @@ JSON mit Formulardaten.
   }
 }
 ```
-0: Ist die Seitenanzahl, aktuell immer 0.
+- 0: Ist die Seitenanzahl, aktuell immer 0.
 
 Bei diesem Request gibt es keine Response die geparsed werden müsste, ledigich der Status Code ist zu beachten.
 
