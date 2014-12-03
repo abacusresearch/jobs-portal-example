@@ -4,11 +4,14 @@ Jobs Portal Beispiel
 Beispielprojekt für eine Anbindung an das Abacus Jobs Portal
 
 JSON API Stellen
-URL für Version 1: https://jobs.abasky.net/rest/v1
+URL für Version 1: 
+
+https://jobs.abasky.net/rest/v1
 
 ### Liste aller Stellen
 
 Method: JSONP
+
 /job/list/{customer_guid}?callback={JSONP_Callback}
 
 - customer_guid: Identifikation der Stellenansicht.
@@ -29,6 +32,7 @@ JSONP_Callback(
 ### Stellenbeschreibung
 
 Method: JSONP
+
 /job/description/{jobId}?callback={JSONP_Callback}
 
 - jobId: Identifikation der Stelle, die in der Liste aller Stellen mitgegeben wird.
@@ -50,6 +54,7 @@ Der Parameter descriptionPage umfasst den kompletten Stellenbschrieb in HTML.
 ### Bewerbungsformular
 
 Method: JSONP
+
 /job/form/{jobId}?callback={JSONP_Callback}
 
 - jobId: Identifikation der Stelle, die in der Liste aller Stellen mitgegeben wird.
@@ -131,6 +136,7 @@ Bespiel eines Formulars:
 ### Dateiupload
 
 Method: POST
+
 /application/file/put/{jobId}/{applicationId}
 
 - jobId:  Identifikation der Stelle.
@@ -174,6 +180,7 @@ Um eine Datei zu löschen, kann die deleteUrl aus der Response des Dateiuploads 
 
 Z.B.:
 Method: DELETE
+
 https://jobs.abasky.net/rest/v1/application/file/delete/{attachmentId}
 
 Reponse:
@@ -192,6 +199,7 @@ Reponse:
 ### Formular Upload
 
 Method: POST
+
 /application/put/{jobId}/{applicationId}
 
 - jobId:  Identifikation der Stelle.
