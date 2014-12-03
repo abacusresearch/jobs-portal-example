@@ -122,3 +122,67 @@ Bespiel eines Formulars:
   "Title": "Sachbearbeiter/in Human Resources"
 }
 ```
+- Fields: Felddefinition die im Formular angezeigt werden sollen.
+- Values: Standardwert eines Feldes, bspw. das selektierte Element einer ComboBox
+
+### Dateiupload
+
+Method: POST
+/application/file/put/{jobId}/{applicationId}
+
+- jobId:  Identifikation der Stelle.
+- applicationId: GUID der Bewerbung welche beim Formular Post ebenfalls mitgegeben wird. Wird vom Client erzeugt.
+
+Dateien werden als Teil eines multipart requests mitgeschickt. Beim Bewerbungsfoto muss als Name applicant_pic .jpg|.png mitgegeben werden.
+
+Response:
+```
+{"files": [
+  {
+    "name": "CV.pdf",
+    "size": 902604,
+    "deleteUrl": "https:\/\/jobs.abasky.net\/rest\/v1/application\/file\/delete\/{attachmentId}",
+    "deleteType": "DELETE"
+  },
+  {
+    "name": "applicant_pic.jpg",
+    "size": 841946,
+    "deleteUrl": "https:\/\/jobs.abasky.net\/rest\/v1/application\/file\/delete\/\/{attachmentId}",
+    "deleteType": "DELETE"
+  }
+]}
+```
+
+Mögliche Response bei einem Fehler:
+
+```
+{"files": [
+  {
+    "name": "CV.pdf",
+    "size": 90260400,
+    "error": "File is too big"
+  }
+]}
+```
+
+### Löschen einer Datei
+
+Um eine Datei zu löschen, kann die deleteUrl aus der Response des Dateiuploads aufgerufen werden mit der entsprechenden Request Methode, im obigen Beispiel DELETE.
+
+Z.B.:
+Method: DELETE
+https:\/\/jobs.abasky.net\/rest\/v1/application\/file\/delete\/\/{attachmentId}
+
+Reponse:
+
+```
+{"files": [
+  {
+    "CV.pdf": true
+  },
+  {
+    "applicant_pic.jpg": true
+  }
+]}
+```
+
