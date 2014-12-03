@@ -198,11 +198,33 @@ Method: POST
 - applicationId: GUID der Bewerbung welche zuvor bei den Dateiuploads mitgegeben wurde.
 
 Reponse Body:
-JSON mit Formulardaten:
+JSON mit Formulardaten.
 
 ```
-
+{
+  "0": {
+    "Zip": {
+      "dataType": "String",
+      "name": "Zip",
+      "processEngineValues": ["9300"],
+      "isList": false
+    },
+    "DateOfBirth": {
+      "dataType": "Date",
+      "name": "DateOfBirth",
+      "processEngineValues": ["2014-12-03"],
+      "isList": false
+    },
+    "Email": {
+      "dataType": "String",
+      "name": "Email",
+      "processEngineValues": ["hans.muster@bewerber.ch"],
+      "isList": false
+    }
+  }
+}
 ```
+0: Ist die Seitenanzahl, aktuell immer 0.
 
 Bei diesem Request gibt es keine Response die geparsed werden müsste, ledigich der Status Code ist zu beachten.
 
