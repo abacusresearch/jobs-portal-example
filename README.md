@@ -36,7 +36,7 @@ JSONP_Callback(
 ```
 - filters: Werte der Filterkriterien
 - filters id: id Des Filters
-- filters values: Id der Values des Filters. Diese werden gebraucht um den entsprechenden Text aus dme Filter zu mappen.
+- filters values: Id der Values des Filters. Diese werden gebraucht um den entsprechenden Text aus dme Filter zu mappen. Aktuell gibt es nur ein Value pro Filter, aber theoretisch sind mehrere möglich.
 
 
 ### Liste der Filter
