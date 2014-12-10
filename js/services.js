@@ -1,4 +1,4 @@
-var baseUrl = "TODO";
+var baseUrl = "https://jobs.abasky.net/rest/v1";
 
 var jobsService = angular.module('jobsServices', []);
 
@@ -16,6 +16,13 @@ jobsService.factory('jobsAPIService', function ($http) {
         return $http({
             method: 'JSONP',
             url: baseUrl + '/job/description/' + jobId + '?callback=JSON_CALLBACK'
+        });
+    };
+
+    jobsAPI.getFilters = function () {
+        return $http({
+            method: 'JSONP',
+            url: baseUrl + '/job/filters/' + customer + '?callback=JSON_CALLBACK'
         });
     };
 

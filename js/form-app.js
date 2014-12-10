@@ -1,7 +1,14 @@
 'use strict';
 
-angular.module('jobsFormApp',
-    ['blueimp.fileupload', 'jobsFormControllers', 'jobsServices', 'jobsFormConfig']);
+var app = angular.module('jobsFormApp',
+    ['blueimp.fileupload', 'jobsFormControllers', 'jobsServices', 'jobsFormConfig', 'pascalprecht.translate']);
+
+app.config(function ($translateProvider) {
+    $translateProvider.translations('de', textDe);
+    $translateProvider.translations('en', textEn);
+    $translateProvider.translations('fr', textFr);
+    $translateProvider.translations('it', textIt);
+});
 
 var jobsConfig = angular.module('jobsFormConfig', []);
 jobsConfig.config([
@@ -15,19 +22,20 @@ jobsConfig.config([
 
 var jobsFormController = angular.module('jobsFormControllers', []);
 
-jobsFormController.controller('JobsFormCtrl', function ($scope, jobsAPIService) {
+jobsFormController.controller('JobsFormCtrl', function ($translate, $scope, jobsAPIService) {
     $scope.jobFields = [];
     $scope.jobValues = [];
-    init($scope);
+    init($scope, $translate);
     jobsAPIService.getForm()
         .success(function (response) {
             $scope.jobFields = response.form.DataRecord.Fields;
             $scope.jobValues = response.form.DataRecord.Values;
+            $scope.jobDescription = response.description;
         });
     $scope.submitForm = function () {
         jobsAPIService.submitForm(getFormData("#applicationForm"))
             .success(function () {
-                window.location = "message.html";
+                window.location = "message.html?customer=" + $scope.customer;
             });
     };
 });
