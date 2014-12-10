@@ -23,11 +23,68 @@ JSONP_Callback(
   [
     {
       "description":"Job",
-      "jobId":"7d6e5e8d-30a8-41d6-a9dd-7b4f652e494a"
+      "jobId":"7d6e5e8d-30a8-41d6-a9dd-7b4f652e494a",
+      "filters": [
+       {
+        "id": "2c7946fd-23c9-4ae5-8499-451eada3d70f",
+        "values": ["6593dbbb-baf9-4c47-a2d5-d8b40701ca5f"]
+       }
+      ]
     }
   ]
 )
 ```
+- filters: Werte der Filterkriterien
+- filters id: id Des Filters
+- filters values: Id der Values des Filters. Diese werden gebraucht um den entsprechenden Text aus dme Filter zu mappen.
+
+
+### Liste der Filter
+
+Method: JSONP
+
+/job/filter/{customer_guid}?callback={JSONP_Callback}
+
+- customer_guid: Identifikation der Stellenansicht.
+- JSONP_Callback: Callback Funktion für CORS requests
+
+```
+JSONP_Callback(
+[
+  {
+    "id": "2c7946fd-23c9-4ae5-8499-451eada3d70f",
+    "title": {
+      "de": "Title_de",
+      "en": "Title_en",
+      "fr": "Title_fr",
+      "it": "Title_it"
+    },
+    "values": [
+      {
+        "id": "6593dbbb-baf9-4c47-a2d5-d8b40701ca5f",
+        "value": {
+          "de": "Value_de",
+          "en": "Value_en",
+          "fr": "Value_fr",
+          "it": "Value_it"
+        }
+      },
+      {
+        "id": "0d55949c-422f-4911-9e7e-3edbd6cf6973",
+        "value": {
+          "de": "Value2_de",
+          "en": "Value2_en",
+          "fr": "Value2_fr",
+          "it": "Value2_it"
+        }
+      }
+    ]
+  }
+]
+)
+```
+- title: Titel des Filters
+- values: Elemente des Filters. Z.B. alle Filialen, bei denen man sich bewerben kann.
 
 ### Stellenbeschreibung
 
