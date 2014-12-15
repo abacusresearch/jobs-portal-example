@@ -9,6 +9,20 @@ app.config(function ($translateProvider) {
     $translateProvider.translations('fr', textFr);
     $translateProvider.translations('it', textIt);
 });
+
+app.directive('onFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit('ngRepeatFinished');
+                });
+            }
+        }
+    }
+});
+
 var jobsController = angular.module('jobsControllers', []);
 
 jobsController.controller('JobsListCtrl', function ($translate, $scope, jobsAPIService) {
@@ -41,22 +55,31 @@ jobsController.controller('JobsListCtrl', function ($translate, $scope, jobsAPIS
                 }
             });
             $scope.jobList = response;
-            $scope.doFilter = function () {
-                $scope.filterSearch;
-                var criteria = $(this).val();
-                if (criteria == 'ALL') {
-                    $('.lilist').show();
-                    return;
-                }
-                $('.country').each(function (i, option) {
-                    if ($(this).html() == criteria) {
-                        $(this).parent().show();
-                    } else {
-                        $(this).parent().hide();
+            $scope.doFilter = function (id) {
+                var criteria = $('#id' + id + ' option:selected').text();
+                $('.nav-filter').each(function () {
+                        if ($(this).hasClass('cl' + id)) {
+                            if ('' === criteria || $(this).html() === criteria) {
+                                $(this).closest('tr').show();
+                            } else {
+                                $(this).closest('tr').hide();
+                            }
+                        } else if ('' === $(this).html()) {
+                            if ('' === criteria) {
+                                $(this).closest('tr').show();
+                            } else {
+                                $(this).closest('tr').hide();
+                            }
+                        }
                     }
-                });
+                );
             };
         });
+    $scope.$on('ngRepeatFinished', function () {
+        $scope.jobFilters.forEach(function (el) {
+            $scope.doFilter(el.id);
+        });
+    });
 });
 
 jobsController.controller('JobsDescriptionCtrl', function ($translate, $sce, $scope, jobsAPIService) {
