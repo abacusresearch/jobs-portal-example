@@ -34,14 +34,14 @@
           data-ng-class="{'fileupload-processing': processing() || loadingFiles}"
           data-ng-submit="submitForm()">
 
-        <div data-ng-repeat="field in jobFields">
+        <div data-ng-repeat="field in jobFields" data-on-finish-render>
             <div data-ng-switch="field.Type">
                 <div class="form-group">
                     <label class="col-sm-2 control-label" data-ng-class="{required: field.Mandatory}">{{field.DisplayName}}</label>
 
                     <div data-ng-switch-when="String">
                         <div class="col-sm-10" data-ng-if="field.IsRadio">
-                            <select class="form-control" data-dtype="{{field.Type}}" name="{{field.ID}}">
+                            <select class="form-control" data-dtype="{{field.Type}}" id="f{{field.ID}}" name="{{field.ID}}">
                                 <option data-ng-repeat="value in field.RadioValues"
                                         value="{{value.Value}}">
                                     {{value.DisplayName}}

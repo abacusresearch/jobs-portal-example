@@ -10,6 +10,19 @@ app.config(function ($translateProvider) {
     $translateProvider.translations('it', textIt);
 });
 
+app.directive('onFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit('ngRepeatFinished');
+                });
+            }
+        }
+    }
+});
+
 var jobsConfig = angular.module('jobsFormConfig', []);
 jobsConfig.config([
     '$httpProvider', 'fileUploadProvider',
@@ -38,6 +51,11 @@ jobsFormController.controller('JobsFormCtrl', function ($translate, $scope, jobs
                 window.location = "message.html?customer=" + $scope.customer;
             });
     };
+    $scope.$on('ngRepeatFinished', function () {
+        $scope.jobValues.forEach(function (el) {
+            $('#f' + el.ID).val(el.Value);
+        });
+    });
 });
 
 jobsFormController.controller('JobFileUploadController', [
