@@ -194,12 +194,13 @@ Bespiel einer solchen Definition:
 
 Method: POST
 
-/application/file/put/{jobId}/{applicationId}
+/application/file/put/{jobId}/{applicationId}?applicantPic=true
 
 - jobId:  Identifikation der Stelle.
 - applicationId: GUID der Bewerbung welche beim Formular Post ebenfalls mitgegeben wird. Wird vom Client erzeugt.
+- ?applicantPic: Wird als Request Parameter applicantPic=true mitgegeben, wird die Datei als Bewerbungsfoto abgespeichert. Erlaubt sind .png|.jpg.
 
-Dateien werden als Teil eines multipart requests mitgeschickt. Beim Bewerbungsfoto muss als Name applicant_pic .jpg|.png mitgegeben werden.
+Dateien werden als Teil eines multipart requests mitgeschickt.
 
 Response:
 ```
