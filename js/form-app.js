@@ -1,7 +1,13 @@
 'use strict';
 
 var app = angular.module('jobsFormApp',
-    ['blueimp.fileupload', 'jobsFormControllers', 'jobsServices', 'jobsFormConfig', 'pascalprecht.translate']);
+    [
+        'blueimp.fileupload',
+        'jobsFormControllers',
+        'jobsServices',
+        'jobsFormConfig',
+        'pascalprecht.translate',
+        'ui.bootstrap']);
 
 app.config(function ($translateProvider) {
     $translateProvider.translations('de', textDe);
@@ -100,3 +106,60 @@ jobsFormController.controller('FileDestroyController', [
         }
     }
 ]);
+
+jobsFormController.controller('PictureUploadController', [
+    '$scope',
+    function ($scope) {
+        if (!applicationId)
+            applicationId = guid();
+        $scope.picOptions = {
+            url: baseUrl + '/application/file/put/' + jobId + '/' + applicationId + "?applicantPic=true"
+        };
+    }
+]);
+
+
+jobsFormController.controller('PictureDestroyController', [
+    '$scope', '$http',
+    function ($scope, $http) {
+        var file = $scope.picture,
+            state;
+        if (file.deleteUrl) {
+            file.$state = function () {
+                return state;
+            };
+            file.$destroy = function () {
+                state = 'pending';
+                return $http({
+                    url: file.deleteUrl,
+                    method: file.deleteType
+                }).then(
+                    function () {
+                        state = 'resolved';
+                        $scope.clear(file);
+                    },
+                    function () {
+                        state = 'rejected';
+                    }
+                );
+            };
+        } else if (!file.$cancel && !file._index) {
+            file.$cancel = function () {
+                $scope.clear(file);
+            };
+        }
+    }
+]);
+
+jobsFormController.controller('DatepickerCtrl', function ($scope) {
+    $scope.clear = function () {
+        $scope.dt = null;
+    };
+
+    $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
+});
