@@ -198,7 +198,8 @@ Method: POST
 
 - jobId:  Identifikation der Stelle.
 - applicationId: GUID der Bewerbung welche beim Formular Post ebenfalls mitgegeben wird. Wird vom Client erzeugt.
-- ?applicantPic: Wird als Request Parameter applicantPic=true mitgegeben, wird die Datei als Bewerbungsfoto abgespeichert. Erlaubt sind .png|.jpg.
+- ?applicantPic: Wird als Request Parameter applicantPic=true mitgegeben, wird die Datei als Bewerbungsfoto abgespeichert. Erlaubt für das Foto sind .png|.jpg. 
+- Die maximale Dateigrösse beträgt 2MB pro Datei und die Anzahl Dateien die pro Bewerbung mitgeschickt werden dürfen ist 10.
 
 Dateien werden als Teil eines multipart requests mitgeschickt.
 
