@@ -7,7 +7,8 @@ var app = angular.module('jobsFormApp',
         'jobsServices',
         'jobsFormConfig',
         'pascalprecht.translate',
-        'ui.bootstrap']);
+        'ui.bootstrap'
+    ]);
 
 app.config(function ($translateProvider) {
     $translateProvider.translations('de', textDe);
