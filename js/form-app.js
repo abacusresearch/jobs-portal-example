@@ -71,6 +71,7 @@ jobsFormController.controller('JobFileUploadController', [
         if (!applicationId)
             applicationId = guid();
         $scope.options = {
+            autoUpload: true,
             url: baseUrl + '/application/file/put/' + jobId + '/' + applicationId
         };
     }
@@ -114,6 +115,7 @@ jobsFormController.controller('PictureUploadController', [
         if (!applicationId)
             applicationId = guid();
         $scope.picOptions = {
+            autoUpload: true,
             url: baseUrl + '/application/file/put/' + jobId + '/' + applicationId + "?applicantPic=true"
         };
     }

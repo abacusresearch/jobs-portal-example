@@ -95,10 +95,6 @@
                     <span>{{'ADD_PICTURE' | translate}}</span>
                     <input type="file" name="files[]" data-ng-disabled="disabled">
                 </span>
-                        <button type="button" class="btn btn-primary start" data-ng-click="submit()">
-                            <i class="glyphicon glyphicon-upload"></i>
-                            <span>{{'UPLOAD' | translate}}</span>
-                        </button>
                         <button type="button" class="btn btn-warning cancel" data-ng-click="cancel()">
                             <i class="glyphicon glyphicon-ban-circle"></i>
                             <span>{{'CANCEL' | translate}}</span>
@@ -136,12 +132,6 @@
                             </div>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary start" data-ng-click="picture.$submit()"
-                                    data-ng-hide="!picture.$submit || picOptions.autoUpload"
-                                    data-ng-disabled="picture.$state() == 'pending' || picture.$state() == 'rejected'">
-                                <i class="glyphicon glyphicon-upload"></i>
-                                <span>{{'UPLOAD' | translate}}</span>
-                            </button>
                             <button type="button" class="btn btn-warning cancel" data-ng-click="picture.$cancel()"
                                     data-ng-hide="!picture.$cancel"> `
                                 <i class="glyphicon glyphicon-ban-circle"></i>
@@ -174,10 +164,6 @@
                     <span>{{'ADD_FILES' | translate}}</span>
                     <input type="file" name="files[]" multiple data-ng-disabled="disabled">
                 </span>
-                        <button type="button" class="btn btn-primary start" data-ng-click="submit()">
-                            <i class="glyphicon glyphicon-upload"></i>
-                            <span>{{'UPLOAD' | translate}}</span>
-                        </button>
                         <button type="button" class="btn btn-warning cancel" data-ng-click="cancel()">
                             <i class="glyphicon glyphicon-ban-circle"></i>
                             <span>{{'CANCEL' | translate}}</span>
@@ -214,12 +200,6 @@
                             </div>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary start" data-ng-click="file.$submit()"
-                                    data-ng-hide="!file.$submit || options.autoUpload"
-                                    data-ng-disabled="file.$state() == 'pending' || file.$state() == 'rejected'">
-                                <i class="glyphicon glyphicon-upload"></i>
-                                <span>{{'UPLOAD' | translate}}</span>
-                            </button>
                             <button type="button" class="btn btn-warning cancel" data-ng-click="file.$cancel()"
                                     data-ng-hide="!file.$cancel">
                                 <i class="glyphicon glyphicon-ban-circle"></i>
