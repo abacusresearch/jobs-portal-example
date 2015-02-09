@@ -6,3 +6,8 @@
 .table {
     table-layout: fixed;
 }
+
+/* Needed to fix a bug in file input - text disappears if the components gets the focus via tab */
+.fontSize20 {
+    font-size: 20px !important;
+}
