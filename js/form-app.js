@@ -53,7 +53,7 @@ jobsFormController.controller('JobsFormCtrl', function ($translate, $scope, jobs
             $scope.jobDescription = response.description;
         });
     $scope.submitForm = function () {
-        jobsAPIService.submitForm(getFormData("#applicationForm"))
+        jobsAPIService.submitForm(getFormData("#appform"))
             .success(function () {
                 window.location = "message.html?customer=" + $scope.customer;
             });
@@ -71,6 +71,7 @@ jobsFormController.controller('JobFileUploadController', [
         if (!applicationId)
             applicationId = guid();
         $scope.options = {
+            dropZone: null,
             autoUpload: true,
             url: baseUrl + '/application/file/put/' + jobId + '/' + applicationId
         };
@@ -115,6 +116,7 @@ jobsFormController.controller('PictureUploadController', [
         if (!applicationId)
             applicationId = guid();
         $scope.picOptions = {
+            dropZone: null,
             autoUpload: true,
             url: baseUrl + '/application/file/put/' + jobId + '/' + applicationId + "?applicantPic=true"
         };
@@ -159,7 +161,7 @@ jobsFormController.controller('DatepickerCtrl', function ($scope) {
         $scope.dt = null;
     };
 
-    $scope.open = function($event) {
+    $scope.open = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
 

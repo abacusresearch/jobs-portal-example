@@ -11,3 +11,8 @@
 .fontSize20 {
     font-size: 20px !important;
 }
+
+/* File input is at the wrong position for the validation message */
+.left0 {
+    left: 0;
+}
