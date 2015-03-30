@@ -31,8 +31,7 @@
     <h3 class="font content-title">{{jobDescription}}</h3>
     <br/>
 
-    <form class="form-horizontal" data-ng-validate data-ng-submit="appform.$valid && submitForm()" id="appform" method="POST"
-          name="appform">
+    <form class="form-horizontal" id="appform" name="appform">
         <div data-ng-repeat="field in jobFields" data-on-finish-render>
             <div data-ng-switch="field.Type">
                 <div class="form-group">

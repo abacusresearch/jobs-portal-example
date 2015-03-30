@@ -52,12 +52,18 @@ jobsFormController.controller('JobsFormCtrl', function ($translate, $scope, jobs
             $scope.jobValues = response.form.DataRecord.Values;
             $scope.jobDescription = response.description;
         });
-    $scope.submitForm = function () {
-        jobsAPIService.submitForm(getFormData("#appform"))
-            .success(function () {
-                window.location = "message.html?customer=" + $scope.customer;
-            });
-    };
+    var form = document.getElementById('appform');
+    form.addEventListener('submit', function (event) {
+        if (form.classList) form.classList.add('submitted');
+        if (!this.checkValidity()) {
+            event.preventDefault();
+        } else {
+            jobsAPIService.submitForm(getFormData("#appform"))
+                .success(function () {
+                    window.location = "message.html?customer=" + $scope.customer;
+                });
+        }
+    }, false);
     $scope.$on('ngRepeatFinished', function () {
         $scope.jobValues.forEach(function (el) {
             $('#f' + el.ID).val(el.Value);
