@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('jobsApp',
-    ['jobsControllers', 'jobsServices', 'pascalprecht.translate']);
+    ['ngSanitize', 'jobsControllers', 'jobsServices', 'pascalprecht.translate']);
 
 app.config(function ($translateProvider) {
     $translateProvider.translations('de', textDe);
