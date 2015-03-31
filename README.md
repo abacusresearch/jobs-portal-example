@@ -43,7 +43,7 @@ JSONP_Callback(
 
 Method: JSONP
 
-/job/filter/{customer_guid}?callback={JSONP_Callback}
+/job/filters/{customer_guid}?callback={JSONP_Callback}
 
 - customer_guid: Identifikation der Stellenansicht.
 - JSONP_Callback: Callback Funktion für CORS requests
