@@ -10,6 +10,7 @@ var textDe = {
     APPLICATION_SENT_MESSAGE: 'Besten Dank f\u00FCr Ihr Interesse.',
     CANCEL: 'Abbrechen',
     DELETE: 'L\u00F6schen',
+    INVALID_DATE_FORMAT: 'Das Datumsformat ist ung\u00FCltig (erwartetes Format: 30.12.1999)',
     JOB_DESCRIPTION: 'Stellenbezeichnung',
     OPEN_JOBS: 'Offene Stellen',
     SEARCH_PLACEHOLDER: 'Suchbegriff',
@@ -25,6 +26,7 @@ var textEn = {
     APPLICATION_SENT_MESSAGE: 'Thank you for your interest.',
     CANCEL: 'Cancel',
     DELETE: 'Delete',
+    INVALID_DATE_FORMAT: 'The date format is invalid (expected format: 30.12.1999)',
     JOB_DESCRIPTION: 'Job title',
     OPEN_JOBS: 'Job vacancies',
     SEARCH_PLACEHOLDER: 'Search term',
@@ -40,6 +42,7 @@ var textFr = {
     APPLICATION_SENT_MESSAGE: 'Nous vous remercions pour votre int\u00e9r\u00eat.',
     CANCEL: 'Annuler',
     DELETE: 'Effacer',
+    INVALID_DATE_FORMAT: 'Le format date n\'est pas valable (format attendu: 30.12.1999)',
     JOB_DESCRIPTION: 'Description de poste',
     OPEN_JOBS: 'Postes vacants',
     SEARCH_PLACEHOLDER: 'Terme de recherche',
@@ -55,6 +58,7 @@ var textIt = {
     APPLICATION_SENT_MESSAGE: 'Grazie per il vostro interesse.',
     CANCEL: 'Annullare',
     DELETE: 'Cancellare',
+    INVALID_DATE_FORMAT: 'Il formato della data non é validto (formato atteso: 30.12.1999)',
     JOB_DESCRIPTION: 'Descrizione funzione',
     OPEN_JOBS: 'Posti di lavoro vacanti',
     SEARCH_PLACEHOLDER: 'Termine di ricerca',
@@ -79,6 +83,29 @@ function getFormData(id) {
         }
     });
     return formData;
+}
+
+function validateForm(form) {
+    var result = true;
+    $(form).find("input[data-dtype='Date']").each(function() {
+        var date = parseDate($(this).val());
+        if(date != "" && !date.match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i)) {
+            result = false;
+            $(this).closest(".col-sm-10").find(".invalid-data-msg").attr('style','display: block !important');
+            $(this).unbind('change');
+            $(this).change(function() {
+                var date = parseDate($(this).val());
+                if(date != "" && !date.match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i)) {
+                    $(this).closest(".col-sm-10").find(".invalid-data-msg").attr('style','display: block !important');
+                } else {
+                    $(this).closest(".col-sm-10").find(".invalid-data-msg").attr('style','display: none !important');
+                }
+            });
+        } else {
+            $(this).closest(".col-sm-10").find(".invalid-data-msg").attr('style','display: none !important')
+        }
+    });
+    return result;
 }
 
 function getLanguage() {

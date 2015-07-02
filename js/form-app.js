@@ -55,7 +55,7 @@ jobsFormController.controller('JobsFormCtrl', function ($translate, $scope, jobs
     var form = document.getElementById('appform');
     form.addEventListener('submit', function (event) {
         if (form.classList) form.classList.add('submitted');
-        if (!this.checkValidity()) {
+        if (!this.checkValidity() || !validateForm(form)) {
             event.preventDefault();
         } else {
             jobsAPIService.submitForm(getFormData("#appform"))
