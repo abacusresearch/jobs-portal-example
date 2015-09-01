@@ -44,5 +44,18 @@ jobsService.factory('jobsAPIService', function ($http) {
         });
     };
 
+    jobsAPI.files = [];
+
+    jobsAPI.hasSuccessfullFile = function() {
+        if(this.files) {
+            for(var i = 0; i < this.files.length; i++) {
+                if(!this.files[i].error) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
     return jobsAPI;
 });

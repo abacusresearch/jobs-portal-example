@@ -55,7 +55,7 @@ jobsFormController.controller('JobsFormCtrl', function ($translate, $scope, jobs
     var form = document.getElementById('appform');
     form.addEventListener('submit', function (event) {
         if (form.classList) form.classList.add('submitted');
-        if (!this.checkValidity() || !validateForm(form)) {
+        if (!this.checkValidity() || !validateForm(form, jobsAPIService)) {
             event.preventDefault();
         } else {
             jobsAPIService.submitForm(getFormData("#appform"))
@@ -72,8 +72,8 @@ jobsFormController.controller('JobsFormCtrl', function ($translate, $scope, jobs
 });
 
 jobsFormController.controller('JobFileUploadController', [
-    '$scope',
-    function ($scope) {
+    '$scope', 'jobsAPIService',
+    function ($scope, jobsAPIService) {
         if (!applicationId)
             applicationId = guid();
         $scope.options = {
@@ -81,6 +81,26 @@ jobsFormController.controller('JobFileUploadController', [
             autoUpload: true,
             url: baseUrl + '/application/file/put/' + jobId + '/' + applicationId
         };
+        $scope.$on('fileuploadadd', function(event, data){
+            var fileNamesValid = true;
+            if(data.files) {
+                data.files.forEach(function(entry) {
+                    fileNamesValid = fileNamesValid && !entry.name.match(/(\||\\|\?|\*|\<|\"|\:|\>|\/)/);
+                });
+            }
+            if(fileNamesValid) {
+                $('.file .filename-msg').attr('style','display: none !important');
+            } else {
+                $('.file .filename-msg').attr('style','display: block !important');
+                event.preventDefault();
+            }
+        });
+        $scope.$on('fileuploadstop', function(){
+            jobsAPIService.files = $scope.queue;
+            if(jobsAPIService.hasSuccessfullFile()) {
+                $(".files-msg").attr('style', 'display: none !important');
+            }
+        });
     }
 ]);
 
@@ -126,6 +146,20 @@ jobsFormController.controller('PictureUploadController', [
             autoUpload: true,
             url: baseUrl + '/application/file/put/' + jobId + '/' + applicationId + "?applicantPic=true"
         };
+        $scope.$on('fileuploadadd', function(event, data){
+            var fileNamesValid = true;
+            if(data.files) {
+                data.files.forEach(function(entry) {
+                    fileNamesValid = fileNamesValid && !entry.name.match(/(\||\\|\?|\*|\<|\"|\:|\>|\/)/);
+                });
+            }
+            if(fileNamesValid) {
+                $('.picture .filename-msg').attr('style','display: none !important');
+            } else {
+                $('.picture .filename-msg').attr('style','display: block !important');
+                event.preventDefault();
+            }
+        });
     }
 ]);
 

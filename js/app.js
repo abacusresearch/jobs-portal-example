@@ -52,33 +52,65 @@ jobsController.controller('JobsListCtrl', function ($translate, $scope, jobsAPIS
                                 });
                             });
                         }
+                        var tmpJobFilters = [];
+                        if($scope.jobFilters) {
+                            $scope.jobFilters.forEach(function(jobFilter) {
+                                var filterFound = false;
+                                if(job.filters) {
+                                    job.filters.some(function(filter) {
+                                        if(filter.id === jobFilter.id) {
+                                          tmpJobFilters.push(filter);
+                                          filterFound = true;
+                                          return true;
+                                        }
+                                    });
+                                }
+                                if(!filterFound) {
+                                    tmpJobFilters.push({
+                                        id : jobFilter.id,
+                                        displayValue : ''
+                                    });
+                                }
+                            });
+                        }
+                        job.filters = tmpJobFilters;
                     });
                     $scope.jobList = response;
                 });
         });
-    $scope.doFilter = function (id) {
-        var criteria = $('#id' + id + ' option:selected').text();
-        $('.nav-filter').each(function () {
-                if ($(this).hasClass('cl' + id)) {
-                    if ('' === criteria || $(this).html() === criteria) {
-                        $(this).closest('tr').show();
-                    } else {
-                        $(this).closest('tr').hide();
-                    }
-                } else if ('' === $(this).html()) {
-                    if ('' === criteria) {
-                        $(this).closest('tr').show();
-                    } else {
-                        $(this).closest('tr').hide();
-                    }
+    $scope.doFilter = function() {
+        $('.nav-row').each(function() {
+            var isHidden = false;
+            var row = $(this);
+            var filterText = $('.filterText').val();
+            if(filterText && filterText.trim() != '') {
+                var itemText = $(this).find('.nav-item').html();
+                if(itemText) {
+                    isHidden = itemText.toLowerCase().indexOf(filterText.trim().toLowerCase()) == -1;
                 }
             }
-        );
+            if(!isHidden) {
+                $('.filterSelect').each(function(){
+                    var criteria = $(this).find('option:selected').text();
+                    var filterId = $(this).attr('id').substring(2);
+                    var value = row.find('.cl' + filterId).html();
+                    if(criteria != '' && value != criteria) {
+                        isHidden = true;
+                    }
+                });
+            }
+            if(isHidden) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        });
     };
     $scope.$on('ngRepeatFinished', function () {
-        $scope.jobFilters.forEach(function (el) {
-            $scope.doFilter(el.id);
-        });
+        $scope.doFilter();
+    });
+    $('.filterText').on('input', function() {
+        $scope.doFilter();
     });
 });
 

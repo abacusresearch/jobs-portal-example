@@ -24,13 +24,13 @@
     <tr>
         <td>
             <h3 class="font content-title">{{'JOB_DESCRIPTION' | translate}}</h3>
-            <input class="form-control font" type="text" data-ng-model="search.description"
+            <input class="form-control font filterText" type="text"
                    placeholder="{{'SEARCH_PLACEHOLDER' | translate}}">
         </td>
         <td data-ng-repeat="jobFilter in jobFilters">
             <h3 class="font content-title">{{jobFilter.title[language]}}</h3>
-            <select class="form-control"
-                    data-ng-change="doFilter(jobFilter.id)"
+            <select class="form-control filterSelect"
+                    data-ng-change="doFilter()"
                     data-ng-model="filterSearch"
                     data-ng-options="jobValue.value[language] for jobValue in jobFilter.values"
                     id="id{{jobFilter.id}}">
@@ -38,9 +38,10 @@
             </select>
         </td>
     </tr>
-    <tr data-ng-repeat="job in jobList | filter:search" data-on-finish-render>
+    <tr data-ng-repeat="job in jobList" class="nav-row"
+        data-ng-class-even="'even'" data-on-finish-render>
         <td>
-            <a class="nav-item font list-group-item"
+            <a class="nav-item font"
                href="description.html?customer={{customer}}&job={{job.jobId}}">{{job.description}}</a>
         </td>
         <td data-ng-repeat="filter in job.filters">
